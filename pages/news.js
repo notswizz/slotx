@@ -12,7 +12,8 @@ const NewsPage = () => {
         url="https://SlotX.vercel.app/news"
         image="https://SlotX.vercel.app/path-to-image.jpg"
       />
-      <h1 className="text-5xl font-extrabold text-center mb-10 text-gray-800">Latest News</h1>
+ 
+
      
       <Stories />
     </div>

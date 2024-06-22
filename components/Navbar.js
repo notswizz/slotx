@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className="flex items-center">
           <div className="relative w-12 h-12 mr-3">
             <Image
-              src="/logo.webp"
+              src="/logo2.webp"
               alt="Casino Chronicles Logo"
               layout="fill"
               objectFit="cover"

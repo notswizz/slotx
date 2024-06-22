@@ -7,7 +7,7 @@ const EmojiKey = ({ filters, toggleFilter }) => {
     } hover:shadow-lg`;
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center mt-8 space-y-4 md:space-y-0 md:space-x-8 p-4 border-2 border-gray-200 rounded-xl bg-gradient-to-r from-gray-100 to-gray-200">
+    <div className="flex flex-col md:flex-row justify-center items-center mt-8 space-y-4 md:space-y-0 md:space-x-8 p-4 border-2 rounded-xl bg-gradient-to-r from-gray-100 to-gray-200 animate-glow">
       <div className={buttonClasses(filters.vpn)} onClick={() => toggleFilter('vpn')}>
         <span>🌐</span>
         <span className="text-gray-700">VPN Needed</span>
