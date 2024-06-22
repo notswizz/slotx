@@ -17,7 +17,7 @@ const SEO = ({ title, description, keywords, url, image }) => {
       <meta property="og:url" content={url} />
       <meta property="og:image" content={image} />
       <meta property="og:site_name" content="SlotX" />
-      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:card" content="/logo2.webp" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />

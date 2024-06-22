@@ -10,7 +10,7 @@ const NewsPage = () => {
         description="Stay updated with the latest news and stories about online casinos. Read the most recent updates and insights from SlotX."
         keywords="latest news, online casinos, casino news, SlotX news"
         url="https://SlotX.vercel.app/news"
-        image="https://SlotX.vercel.app/path-to-image.jpg"
+        image="/logo2.webp"
       />
  
 
