@@ -118,25 +118,25 @@ const Casino = () => {
     .sort((a, b) => b.upvotes - a.upvotes); // Sort by upvotes in descending order
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-4 md:py-8">
       <EmojiKey filters={filters} toggleFilter={toggleFilter} />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 max-h-screen overflow-y-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-4 md:mt-8 max-h-screen overflow-y-auto">
         {filteredCasinos.map((casino) => (
           <div
             key={casino.id}
             className={`relative bg-white border-2 ${getBorderColor(casino.recommendation)} rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105`}
           >
-            <div className="relative p-6 z-10 bg-white rounded-lg">
+            <div className="relative p-4 md:p-6 z-10 bg-white rounded-lg">
               <a
                 href={casino.referralLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-2xl font-semibold mb-2 text-gray-800 hover:text-blue-500"
+                className="text-xl md:text-2xl font-semibold mb-2 text-gray-800 hover:text-blue-500"
               >
                 {casino.name}
               </a>
               {casino.logo && (
-                <div className="relative mb-4 w-full h-32 overflow-hidden rounded-lg border border-gray-300 shadow-lg">
+                <div className="relative mb-4 w-full h-32 md:h-40 overflow-hidden rounded-lg border border-gray-300 shadow-lg">
                   <img
                     src={casino.logo}
                     alt={`${casino.name} logo`}
@@ -144,7 +144,7 @@ const Casino = () => {
                   />
                 </div>
               )}
-              <div className="flex space-x-4 text-lg">
+              <div className="flex space-x-2 md:space-x-4 text-lg">
                 {casino.vpn && <span className="text-blue-600">🌐</span>}
                 {casino.cryptoOnly && <span className="text-green-600">🔗</span>}
                 {casino.sportsbook && <span className="text-yellow-600">🏅</span>}
@@ -155,18 +155,18 @@ const Casino = () => {
               <div className="flex items-center justify-between mt-4">
                 <button
                   onClick={() => handleVouch(casino.id)}
-                  className={`relative inline-flex items-center justify-center p-1 mb-1 overflow-hidden text-sm font-medium rounded-lg group ${vouchedCasinos.has(casino.id) ? 'bg-gray-500 text-gray-200 cursor-not-allowed' : 'bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800'}`}
+                  className={`relative inline-flex items-center justify-center p-1 mb-1 overflow-hidden text-sm font-medium rounded-lg group ${vouchedCasinos.has(casino.id) ? 'bg-gray-500 text-gray-200 cursor-not-allowed' : 'bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300'}`}
                   disabled={vouchedCasinos.has(casino.id)}
                 >
-                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
                     {vouchedCasinos.has(casino.id) ? 'Vouched' : 'Vouch'} ({casino.upvotes})
                   </span>
                 </button>
                 <button
                   onClick={() => openModal(casino)}
-                  className="relative inline-flex items-center justify-center p-1 mb-1 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
+                  className="relative inline-flex items-center justify-center p-1 mb-1 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200"
                 >
-                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
                     Comments ({casino.comments.length})
                   </span>
                 </button>

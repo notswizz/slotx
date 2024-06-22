@@ -14,7 +14,7 @@ const Stories = () => {
           ...story,
           shares: story.shares !== undefined ? story.shares : 0,
         }));
-        console.log('Stories with shares:', storiesWithShares); // Log the stories with shares
+        console.log('Stories with shares:', storiesWithShares);
         setStories(storiesWithShares);
       })
       .catch((error) => console.error('Error fetching stories:', error));
@@ -47,7 +47,7 @@ const Stories = () => {
       }
 
       const updatedStory = await response.json();
-      console.log('Updated story after share:', updatedStory); // Log the updated story
+      console.log('Updated story after share:', updatedStory);
       setStories((prevStories) =>
         prevStories.map((story) => (story.id === updatedStory.id ? updatedStory : story))
       );
@@ -57,25 +57,32 @@ const Stories = () => {
   };
 
   return (
-    <div className="mt-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div className="mt-4 md:mt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10">
         {stories.map((story) => (
           <div key={story.id} className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-            <div className="p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-900 cursor-pointer hover:text-blue-500 transition duration-300" onClick={() => handleExpand(story)}>
+            <div className="p-4 md:p-6">
+              <h3
+                className="text-lg md:text-xl font-semibold mb-2 md:mb-4 text-gray-900 cursor-pointer hover:text-blue-500 transition duration-300"
+                onClick={() => handleExpand(story)}
+              >
                 {story.title}
               </h3>
               {story.image && (
-                <img src={story.image} alt={story.title} className="w-full h-48 object-cover rounded mb-6 border border-gray-300 transition duration-300" />
+                <img
+                  src={story.image}
+                  alt={story.title}
+                  className="w-full h-32 md:h-48 object-cover rounded mb-4 md:mb-6 border border-gray-300 transition duration-300"
+                />
               )}
               <button
-                className="text-blue-600 hover:underline border border-blue-600 px-4 py-2 rounded hover:bg-blue-600 hover:text-white transition-all duration-300"
+                className="text-blue-600 hover:underline border border-blue-600 px-2 py-1 md:px-4 md:py-2 rounded hover:bg-blue-600 hover:text-white transition-all duration-300"
                 onClick={() => handleExpand(story)}
               >
                 Read
               </button>
               <button
-                className="text-green-600 hover:underline border border-green-600 px-4 py-2 rounded hover:bg-green-600 hover:text-white transition-all duration-300 ml-2"
+                className="text-green-600 hover:underline border border-green-600 px-2 py-1 md:px-4 md:py-2 rounded hover:bg-green-600 hover:text-white transition-all duration-300 ml-1 md:ml-2"
                 onClick={() => handleShare(story.id)}
               >
                 Share ({story.shares})
@@ -88,11 +95,15 @@ const Stories = () => {
       <Modal show={!!expandedStory} onClose={handleCloseModal}>
         {expandedStory && (
           <div>
-            <h3 className="text-2xl font-semibold mb-4 text-gray-900">{expandedStory.title}</h3>
+            <h3 className="text-lg md:text-2xl font-semibold mb-2 md:mb-4 text-gray-900">{expandedStory.title}</h3>
             {expandedStory.image && (
-              <img src={expandedStory.image} alt={expandedStory.title} className="w-full h-48 object-cover rounded mb-6 border border-gray-300 transition duration-300" />
+              <img
+                src={expandedStory.image}
+                alt={expandedStory.title}
+                className="w-full h-32 md:h-48 object-cover rounded mb-4 md:mb-6 border border-gray-300 transition duration-300"
+              />
             )}
-            <div className="prose max-w-none text-gray-700 mb-6" dangerouslySetInnerHTML={{ __html: marked.parse(expandedStory.words) }}></div>
+            <div className="prose max-w-none text-gray-700 mb-4 md:mb-6" dangerouslySetInnerHTML={{ __html: marked.parse(expandedStory.words) }}></div>
           </div>
         )}
       </Modal>
