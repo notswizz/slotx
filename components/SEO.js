@@ -1,6 +1,9 @@
 import Head from 'next/head';
 
-const SEO = ({ title, description, keywords, url, image }) => {
+const SEO = ({ title, description, keywords }) => {
+  const url = "https://SlotX.vercel.app";
+  const image = "/logo2.webp";
+
   return (
     <Head>
       <title>{title}</title>
@@ -17,7 +20,7 @@ const SEO = ({ title, description, keywords, url, image }) => {
       <meta property="og:url" content={url} />
       <meta property="og:image" content={image} />
       <meta property="og:site_name" content="SlotX" />
-      <meta name="twitter:card" content="/logo2.webp" />
+      <meta name="twitter:card" content={image} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
