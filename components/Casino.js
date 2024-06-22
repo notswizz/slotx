@@ -104,9 +104,7 @@ const Casino = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-5xl font-extrabold text-center mb-10 text-gray-800">
-        Online Casino Options
-      </h1>
+     
   
       <EmojiKey filters={filters} toggleFilter={toggleFilter} />
   

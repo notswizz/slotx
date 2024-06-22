@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 const CommentModal = ({ isOpen, onClose, casino, addComment }) => {
   const [comment, setComment] = useState('');
+  const [localComments, setLocalComments] = useState(casino.comments);
 
   if (!isOpen) return null;
 
@@ -9,6 +10,7 @@ const CommentModal = ({ isOpen, onClose, casino, addComment }) => {
     e.preventDefault();
     if (comment.trim()) {
       addComment(casino.id, comment);
+      setLocalComments([...localComments, comment]);
       setComment('');
     }
   };
@@ -27,9 +29,8 @@ const CommentModal = ({ isOpen, onClose, casino, addComment }) => {
         <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">{casino.name} Comments</h2>
         <div className="mb-4 max-h-48 overflow-y-auto">
           <ul className="space-y-4">
-            {casino.comments.map((comment, index) => (
+            {localComments.map((comment, index) => (
               <li key={index} className="flex items-start gap-2.5">
-                
                 <div className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
                   <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{comment}</p>
                 </div>
