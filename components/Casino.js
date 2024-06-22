@@ -25,7 +25,7 @@ const Casino = () => {
       .then((data) => {
         const initializedCasinos = data.map((casino) => ({
           ...casino,
-          upvotes: casino.upvotes || 0,
+          upvotes: casino.upvotes ? parseInt(casino.upvotes.$numberInt || casino.upvotes) : 0,
           comments: casino.comments || [],
         }));
         setCasinos(initializedCasinos);
@@ -91,30 +91,42 @@ const Casino = () => {
     }
   };
 
-  const filteredCasinos = casinos.filter((casino) => {
-    return (
-      (!filters.vpn || casino.vpn) &&
-      (!filters.cryptoOnly || casino.cryptoOnly) &&
-      (!filters.sportsbook || casino.sportsbook) &&
-      (!filters.tableGames || casino.tableGames) &&
-      (!filters.welcomeBonus || casino.welcomeBonus) &&
-      (!filters.instantPayout || casino.instantPayout)
-    );
-  });
+  const getBorderColor = (recommendation) => {
+    switch (recommendation) {
+      case 'green':
+        return 'border-green-500';
+      case 'yellow':
+        return 'border-yellow-500';
+      case 'red':
+        return 'border-red-500';
+      default:
+        return 'border-gray-300';
+    }
+  };
+
+  const filteredCasinos = casinos
+    .filter((casino) => {
+      return (
+        (!filters.vpn || casino.vpn) &&
+        (!filters.cryptoOnly || casino.cryptoOnly) &&
+        (!filters.sportsbook || casino.sportsbook) &&
+        (!filters.tableGames || casino.tableGames) &&
+        (!filters.welcomeBonus || casino.welcomeBonus) &&
+        (!filters.instantPayout || casino.instantPayout)
+      );
+    })
+    .sort((a, b) => b.upvotes - a.upvotes); // Sort by upvotes in descending order
 
   return (
     <div className="container mx-auto px-4 py-8">
-     
-  
       <EmojiKey filters={filters} toggleFilter={toggleFilter} />
-  
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 max-h-screen overflow-y-auto">
         {filteredCasinos.map((casino) => (
           <div
             key={casino.id}
-            className="bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105"
+            className={`relative bg-white border-2 ${getBorderColor(casino.recommendation)} rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105`}
           >
-            <div className="p-6">
+            <div className="relative p-6 z-10 bg-white rounded-lg">
               <a
                 href={casino.referralLink}
                 target="_blank"
@@ -124,11 +136,13 @@ const Casino = () => {
                 {casino.name}
               </a>
               {casino.logo && (
-                <img
-                  src={casino.logo}
-                  alt={`${casino.name} logo`}
-                  className="mb-4 w-full h-32 object-cover rounded"
-                />
+                <div className="relative mb-4 w-full h-32 overflow-hidden rounded-lg border border-gray-300 shadow-lg">
+                  <img
+                    src={casino.logo}
+                    alt={`${casino.name} logo`}
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
               )}
               <div className="flex space-x-4 text-lg">
                 {casino.vpn && <span className="text-blue-600">🌐</span>}
@@ -141,7 +155,7 @@ const Casino = () => {
               <div className="flex items-center justify-between mt-4">
                 <button
                   onClick={() => handleVouch(casino.id)}
-                  className={`relative inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium rounded-lg group ${vouchedCasinos.has(casino.id) ? 'bg-gray-500 text-gray-200 cursor-not-allowed' : 'bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800'}`}
+                  className={`relative inline-flex items-center justify-center p-1 mb-1 overflow-hidden text-sm font-medium rounded-lg group ${vouchedCasinos.has(casino.id) ? 'bg-gray-500 text-gray-200 cursor-not-allowed' : 'bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800'}`}
                   disabled={vouchedCasinos.has(casino.id)}
                 >
                   <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -150,7 +164,7 @@ const Casino = () => {
                 </button>
                 <button
                   onClick={() => openModal(casino)}
-                  className="relative inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
+                  className="relative inline-flex items-center justify-center p-1 mb-1 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
                 >
                   <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                     Comments ({casino.comments.length})
@@ -161,7 +175,7 @@ const Casino = () => {
           </div>
         ))}
       </div>
-  
+
       {selectedCasino && (
         <CommentModal
           isOpen={isModalOpen}
@@ -172,8 +186,6 @@ const Casino = () => {
       )}
     </div>
   );
-  
-  
 };
 
 export default Casino;

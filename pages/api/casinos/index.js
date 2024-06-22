@@ -20,12 +20,18 @@ export default async function handler(req, res) {
         upvotes: casino.upvotes ? parseInt(casino.upvotes.$numberInt || casino.upvotes) : 0,
         referralLink: casino.referralLink,
         logo: casino.logo,
+        recommendation: casino.recommendation || 'green', // Include recommendation in the response
         comments: casino.comments || []
       }));
       res.json(simplifiedCasinos);
       break;
+    case 'POST':
+      const newCasino = req.body;
+      await db.collection('casinos').insertOne(newCasino);
+      res.status(201).json({ message: 'Casino added successfully' });
+      break;
     default:
-      res.setHeader('Allow', ['GET']);
+      res.setHeader('Allow', ['GET', 'POST']);
       res.status(405).end(`Method ${req.method} Not Allowed`);
       break;
   }

@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className="flex items-center">
           <div className="relative w-12 h-12 mr-3">
             <Image
-              src="/logo1.webp"
+              src="/logo.webp"
               alt="Casino Chronicles Logo"
               layout="fill"
               objectFit="cover"
@@ -28,12 +28,7 @@ const Navbar = () => {
           <Link href="/" legacyBehavior>
             <a className="hover:text-gray-300">Casino</a>
           </Link>
-          <Link href="/slots" legacyBehavior>
-            <a className="hover:text-gray-300">Slots</a>
-          </Link>
-          <Link href="/promotions" legacyBehavior>
-            <a className="hover:text-gray-300">Promos</a>
-          </Link>
+         
           <Link href="/news" legacyBehavior>
             <a className="hover:text-gray-300">News</a>
           </Link>
@@ -49,12 +44,7 @@ const Navbar = () => {
           <Link href="/" legacyBehavior>
             <a className="block px-4 py-2 hover:bg-gray-700">Casino</a>
           </Link>
-          <Link href="/slots" legacyBehavior>
-            <a className="block px-4 py-2 hover:bg-gray-700">Slots</a>
-          </Link>
-          <Link href="/promotions" legacyBehavior>
-            <a className="block px-4 py-2 hover:bg-gray-700">Promos</a>
-          </Link>
+         
           <Link href="/news" legacyBehavior>
             <a className="block px-4 py-2 hover:bg-gray-700">News</a>
           </Link>

@@ -10,6 +10,7 @@ const AddCasino = ({ addCasino }) => {
   const [instantPayout, setInstantPayout] = useState(false);
   const [referralLink, setReferralLink] = useState('');
   const [logo, setLogo] = useState('');
+  const [recommendation, setRecommendation] = useState('green'); // New state for recommendation
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ const AddCasino = ({ addCasino }) => {
       instantPayout,
       referralLink,
       logo,
+      recommendation, // Include recommendation in the new casino data
       comments: [],
       upvotes: 0,
     };
@@ -36,6 +38,7 @@ const AddCasino = ({ addCasino }) => {
     setInstantPayout(false);
     setReferralLink('');
     setLogo('');
+    setRecommendation('green'); // Reset recommendation
   };
 
   return (
@@ -127,6 +130,18 @@ const AddCasino = ({ addCasino }) => {
           onChange={(e) => setLogo(e.target.value)}
           className="w-full p-2 border rounded"
         />
+      </div>
+      <div>
+        <label className="block text-gray-700">Recommendation</label>
+        <select
+          value={recommendation}
+          onChange={(e) => setRecommendation(e.target.value)}
+          className="w-full p-2 border rounded"
+        >
+          <option value="green">Green</option>
+          <option value="yellow">Yellow</option>
+          <option value="red">Red</option>
+        </select>
       </div>
       <button type="submit" className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
         Add Casino

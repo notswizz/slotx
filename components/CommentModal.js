@@ -31,8 +31,8 @@ const CommentModal = ({ isOpen, onClose, casino, addComment }) => {
           <ul className="space-y-4">
             {localComments.map((comment, index) => (
               <li key={index} className="flex items-start gap-2.5">
-                <div className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-                  <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{comment}</p>
+                <div className="flex flex-col w-full max-w-[320px] p-4 border rounded-lg bg-gray-100 dark:bg-gray-700 border-gray-200 dark:border-gray-600">
+                  <p className="text-sm font-normal text-gray-900 dark:text-white">{comment}</p>
                 </div>
               </li>
             ))}
@@ -45,10 +45,10 @@ const CommentModal = ({ isOpen, onClose, casino, addComment }) => {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               required
-              className="w-full p-2 border rounded dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
+              className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
             />
           </div>
-          <button type="submit" className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">
+          <button type="submit" className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300">
             Submit
           </button>
         </form>
