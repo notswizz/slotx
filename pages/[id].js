@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { marked } from 'marked';
-import SEO from '../../components/SEO';
+import SEO from '../components/SEO';
 
 const StoryPage = () => {
   const router = useRouter();
